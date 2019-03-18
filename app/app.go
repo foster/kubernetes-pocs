@@ -11,7 +11,7 @@ import (
 )
 
 const LISTEN_ADDR = ":3000"
-const CONTROL_LISTEN_ADDR = "127.0.0.1:2999"
+const CONTROL_LISTEN_ADDR = "localhost:2999"
 
 // hello
 func logTime() {

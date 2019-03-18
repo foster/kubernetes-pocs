@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: app:latest
+        imagePullPolicy: Never
+      - name: sidecar-ctl
+        image: sidecar-ctl:latest
+        imagePullPolicy: Never
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debugger
+  labels:
+    app: kubectl
+spec:
+  containers:
+    - name: debugger
+      image: kube-debugger
+      imagePullPolicy: Never
+
