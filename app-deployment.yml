@@ -18,8 +18,8 @@ spec:
       - name: app
         image: app:latest
         imagePullPolicy: Never
-      - name: sidecar-ctl
-        image: sidecar-ctl:latest
+      - name: sidecar
+        image: sidecar:latest
         imagePullPolicy: Never
 
 ---
