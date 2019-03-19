@@ -15,12 +15,26 @@ spec:
         app: app
     spec:
       containers:
-      - name: app
-        image: app:latest
-        imagePullPolicy: Never
-      - name: sidecar
-        image: sidecar:latest
-        imagePullPolicy: Never
+        - name: app
+          image: app:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+        - name: sidecar
+          image: sidecar:latest
+          imagePullPolicy: Never
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+      # volumes:
+      #   - name: podinfo
+      #     downwardAPI:
+      #       items:
+      #         - path: "selector"
+      #           fieldRef:
+      #             fieldPath: deployment.selector
 
 ---
 

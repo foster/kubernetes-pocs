@@ -22,6 +22,7 @@
     kubectl get pods -l app=app
     kubectl logs app-deployment-664b98d96b-fw5pn app
     kubectl exec -it debugger bash
+    kubectl exec app-deployment-5788b7f744-d5wbd -c sidecar -it sh
 
 4) Clean up
 
