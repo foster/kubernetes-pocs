@@ -20,6 +20,16 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 2999
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 30
         - name: sidecar
           image: sidecar:latest
           imagePullPolicy: Never
@@ -28,25 +38,3 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-      # volumes:
-      #   - name: podinfo
-      #     downwardAPI:
-      #       items:
-      #         - path: "selector"
-      #           fieldRef:
-      #             fieldPath: deployment.selector
-
----
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: debugger
-  labels:
-    app: kubectl
-spec:
-  containers:
-    - name: debugger
-      image: kube-debugger
-      imagePullPolicy: Never
-
